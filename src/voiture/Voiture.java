@@ -1,3 +1,5 @@
+package voiture;
+
 public class Voiture {
     private int vitesse;
     private int position;
