@@ -96,8 +96,8 @@ public class VoitureFactory {
                 ByteArrayClasseLoader loader = new ByteArrayClasseLoader(classes);
                 List<Voiture> mesVoitures = new ArrayList<Voiture>();
                 try {
-                    mesVoitures.add((Voiture) (Class.forName("voiture.Voiture1", true, loader).getDeclaredConstructor().newInstance()));
-                    mesVoitures.add((Voiture) (Class.forName("voiture.Voiture2", true, loader).getDeclaredConstructor().newInstance()));
+                    mesVoitures.add((Voiture) (Class.forName("dynamique.Voiture1", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{10})));
+                    mesVoitures.add((Voiture) (Class.forName("dynamique.Voiture2", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{20})));
                 } catch (ClassNotFoundException | NoSuchMethodException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -112,6 +112,7 @@ public class VoitureFactory {
                 for (Voiture t : mesVoitures){
                     System.out.println("CLASSE : " + t.getClass());
                     System.out.println("VITESSE : " + t.getVitesse());
+                    System.out.println("POSITION : " + t.getPosition());
                 }
             case REFLEXION:
 
