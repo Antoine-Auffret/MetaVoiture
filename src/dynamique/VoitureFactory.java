@@ -69,13 +69,11 @@ public class VoitureFactory {
                 };
 
                 // ******** ETAPE #2 : Génération du code source
-                List<JavaFileObject> sources = List.of(
-                        buildSource("Voiture1"),
-                        buildSource("Voiture2"));
+                List<JavaFileObject> source = List.of(buildSource("Voiture1"));
 
                 // ******** ETAPE #3 : Compilation
                 JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, collector, null,
-                        null, sources);
+                        null, source);
                 Boolean result = task.call();
 
                 for (Diagnostic<? extends JavaFileObject> d : collector.getDiagnostics())
@@ -94,10 +92,8 @@ public class VoitureFactory {
 
                 // ******** ETAPE #4 : Instanciation
                 ByteArrayClasseLoader loader = new ByteArrayClasseLoader(classes);
-                List<Voiture> mesVoitures = new ArrayList<Voiture>();
                 try {
-                    mesVoitures.add((Voiture) (Class.forName("dynamique.Voiture1", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{10})));
-                    mesVoitures.add((Voiture) (Class.forName("dynamique.Voiture2", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{20})));
+                    voiture = (Voiture) (Class.forName("dynamique.Voiture1", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{10}));
                 } catch (ClassNotFoundException | NoSuchMethodException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -109,11 +105,10 @@ public class VoitureFactory {
                 }
 
                 // ******** ETAPE #5 : Exécution
-                for (Voiture t : mesVoitures){
-                    System.out.println("CLASSE : " + t.getClass());
-                    System.out.println("VITESSE : " + t.getVitesse());
-                    System.out.println("POSITION : " + t.getPosition());
-                }
+                    System.out.println("CLASSE : " + voiture.getClass());
+                    System.out.println("VITESSE : " + voiture.getVitesse());
+                    System.out.println("POSITION : " + voiture.getPosition());
+
             case REFLEXION:
 
                 Class<?> maClasse = null;
