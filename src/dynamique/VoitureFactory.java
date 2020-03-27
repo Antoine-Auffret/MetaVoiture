@@ -1,15 +1,19 @@
 package dynamique;
 
-//import pack.StringSource;
 import javax.tools.JavaFileObject;
+import voiture.Voiture;
 
 public class VoitureFactory {
 
-    public static Object ModeConstruction;
+    public enum ModeConstruction {
+        INSTANCIATION,
+        META,
+        REFLEXION
+    }
 
     public static JavaFileObject buildSource(String nomClasse) {
 
-        int x = (int)(Math.random() * 1000);
+        int x = (int) (Math.random() * 1000);
         StringBuilder sb = new StringBuilder();
 
         sb.append("package dynamique;\n");
@@ -25,7 +29,8 @@ public class VoitureFactory {
         return new StringSource(nomClasse, sb.toString());
     }
 
-    public static void buildVoiture() {
+    public static Voiture buildVoiture(ModeConstruction modeConstruction, boolean stop, int speed) {
+        return new Voiture(speed);
     }
 
     private static void genererConstructeurs(String nomClasse, int x, StringBuilder sb) {

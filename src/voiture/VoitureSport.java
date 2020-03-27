@@ -1,5 +1,5 @@
 package voiture;
 
-public class VoitureSport {
+public class VoitureSport extends Voiture {
     public VoitureSport(){}
 }

@@ -5,6 +5,8 @@ public class Voiture {
     private int position;
     private int id;
 
+    public Voiture(){}
+
     public Voiture(int vitesse){
         this.vitesse = vitesse;
     }
