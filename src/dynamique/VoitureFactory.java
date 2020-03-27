@@ -24,6 +24,7 @@ public class VoitureFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.append("package dynamique;\n");
+        sb.append("import voiture.Voiture;\n");
         sb.append("public class " + nomClasse + " extends Voiture{\n");
         genererAttributs(sb);
         genererConstructeurs(nomClasse, x, sb);
@@ -95,8 +96,8 @@ public class VoitureFactory {
                 ByteArrayClasseLoader loader = new ByteArrayClasseLoader(classes);
                 List<Voiture> mesVoitures = new ArrayList<Voiture>();
                 try {
-                    mesVoitures.add((Voiture) (Class.forName("dynamique.Voiture1", true, loader).getDeclaredConstructor().newInstance()));
-                    mesVoitures.add((Voiture) (Class.forName("dynamique.Voiture2", true, loader).getDeclaredConstructor().newInstance()));
+                    mesVoitures.add((Voiture) (Class.forName("voiture.Voiture1", true, loader).getDeclaredConstructor().newInstance()));
+                    mesVoitures.add((Voiture) (Class.forName("voiture.Voiture2", true, loader).getDeclaredConstructor().newInstance()));
                 } catch (ClassNotFoundException | NoSuchMethodException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -137,17 +138,17 @@ public class VoitureFactory {
 
     private static void genererConstructeurs(String nomClasse, int x, StringBuilder sb) {
 
-        sb.append("public " + nomClasse + "(){ y = 8; setX(" + x + ");}\n");
+        sb.append("public " + nomClasse + "(int vitesse){ super(" + x + ");}\n");
     }
 
     private static void genererMethodes(StringBuilder sb) {
 
-        sb.append("public int getY(){return y;}\n");
+        sb.append("public int getPosition(){return position;}\n");
 
     }
 
     private static void genererAttributs(StringBuilder sb) {
 
-        sb.append("private int y;\n");
+        sb.append("private int position;\n");
     }
 }

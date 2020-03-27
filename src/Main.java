@@ -17,7 +17,9 @@ public class Main {
             int x = 0;
             while (x++ < 20) {
                 for (Voiture v : mesVoitures) {
+                    System.out.println("print avant");
                     v.deplacement();
+                    System.out.println("print après");
                     System.out.println(v);
                     surveillerVoiture(v);
                 }
