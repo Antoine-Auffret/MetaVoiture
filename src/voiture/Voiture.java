@@ -1,34 +1,24 @@
 package voiture;
 
 public class Voiture {
-    private int vitesse;
-    private int position;
+    private int vitesse = 10;
+    private int position = 0;
     private int id;
 
-    public Voiture(){}
-
+    private static int _id = 0;
     public Voiture(int vitesse){
         this.vitesse = vitesse;
     }
-
-    public void deplacement(){
-
+    public void deplacement(){ position += vitesse; }
+    public int getPosition(){
+        return position;
     }
-
+    public int getVitesse(){ return vitesse; }
+    public int getId(){
+        return id;
+    }
     @Override
     public String toString(){
         return "";
-    }
-
-    public int getVitesse(){
-        return this.vitesse;
-    }
-
-    public int getPosition(){
-        return this.position;
-    }
-
-    public int getId(){
-        return this.id;
     }
 }
