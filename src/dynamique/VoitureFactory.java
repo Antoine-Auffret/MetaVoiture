@@ -3,6 +3,9 @@ package dynamique;
 import javax.tools.JavaFileObject;
 import voiture.Voiture;
 
+import java.lang.*;
+import java.lang.reflect.InvocationTargetException;
+
 public class VoitureFactory {
 
     public enum ModeConstruction {
@@ -30,7 +33,36 @@ public class VoitureFactory {
     }
 
     public static Voiture buildVoiture(ModeConstruction modeConstruction, boolean stop, int speed) {
-        return new Voiture(speed);
+        Voiture voiture = null;
+
+        switch(modeConstruction)
+        {
+            case INSTANCIATION:
+                voiture = new Voiture(speed);
+                break;
+            case META:
+                break;
+            case REFLEXION:
+
+                Class<?> maClasse = null;
+
+                try {
+
+                    maClasse = Class.forName("voiture.Voiture");
+
+                    Object o = maClasse.getDeclaredConstructor(int.class).newInstance(speed);
+
+                    voiture = Voiture.class.cast(o);
+
+                } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException
+                e) {
+                    e.printStackTrace();
+                }
+
+                break;
+        }
+
+        return voiture;
     }
 
     private static void genererConstructeurs(String nomClasse, int x, StringBuilder sb) {

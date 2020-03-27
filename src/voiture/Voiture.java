@@ -12,7 +12,7 @@ public class Voiture {
     }
 
     public void deplacement(){
-
+        position+=vitesse;
     }
 
     @Override
