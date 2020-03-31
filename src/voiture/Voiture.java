@@ -7,6 +7,7 @@ public class Voiture {
 
     private static int _id = 0;
     public Voiture(int vitesse){
+        this.id = _id++;
         this.vitesse = vitesse;
     }
     public void deplacement(){ position += vitesse; }
