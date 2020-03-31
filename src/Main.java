@@ -9,8 +9,8 @@ public class Main {
     public static void main(String[] args) {
 
         List<Voiture> mesVoitures = new ArrayList<Voiture>();
-        ajoutVoituresInstanciation(mesVoitures);
-        ajoutVoituresReflexion(mesVoitures);
+        //ajoutVoituresInstanciation(mesVoitures);
+        //ajoutVoituresReflexion(mesVoitures);
         ajoutVoituresMeta(mesVoitures);
 
         try {
@@ -46,7 +46,10 @@ public class Main {
 
     }
     private static void surveillerVoiture(Voiture v) throws Exception {
-        if (v.getPosition() > 1000){
+        System.out.println(v.getPosition());
+        if (v.getPosition() > 500){
+            System.out.println("depassement");
+            System.out.println(v.getClass().getName());
             if (v.getClass().getName().contains("Meta")){
                 int depassement = ((Surveillable)v).surveiller(60);
                 if (depassement > 10) {

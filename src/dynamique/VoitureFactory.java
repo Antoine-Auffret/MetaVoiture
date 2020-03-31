@@ -3,6 +3,7 @@ package dynamique;
 import javax.tools.*;
 
 import voiture.Voiture;
+import voiture.VoitureSport;
 
 import java.lang.*;
 import java.io.IOException;
@@ -20,14 +21,14 @@ public class VoitureFactory {
 
     public static JavaFileObject buildSource(String nomClasse) {
 
-        int x = (int) (Math.random() * 1000);
+        //int x = (int) (Math.random() * 1000);
         StringBuilder sb = new StringBuilder();
 
         sb.append("package dynamique;\n");
-        sb.append("import voiture.Voiture;\n");
-        sb.append("public class " + nomClasse + " extends Voiture{\n");
+        sb.append("import voiture.VoitureSport;\n");
+        sb.append("public class " + nomClasse + " extends VoitureSport {\n");
         genererAttributs(sb);
-        genererConstructeurs(nomClasse, x, sb);
+        genererConstructeurs(nomClasse, 0, sb);
         genererMethodes(sb);
         sb.append("}\n");
 
@@ -69,7 +70,7 @@ public class VoitureFactory {
                 };
 
                 // ******** ETAPE #2 : Génération du code source
-                List<JavaFileObject> source = List.of(buildSource("Voiture1"));
+                List<JavaFileObject> source = List.of(buildSource("MetaVoitureSport"));
 
                 // ******** ETAPE #3 : Compilation
                 JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, collector, null,
@@ -93,7 +94,7 @@ public class VoitureFactory {
                 // ******** ETAPE #4 : Instanciation
                 ByteArrayClasseLoader loader = new ByteArrayClasseLoader(classes);
                 try {
-                    voiture = (Voiture) (Class.forName("dynamique.Voiture1", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{10}));
+                    voiture = (Voiture) (Class.forName("dynamique.MetaVoitureSport", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{10}));
                 } catch (ClassNotFoundException | NoSuchMethodException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -105,9 +106,12 @@ public class VoitureFactory {
                 }
 
                 // ******** ETAPE #5 : Exécution
-                    System.out.println("CLASSE : " + voiture.getClass());
-                    System.out.println("VITESSE : " + voiture.getVitesse());
-                    System.out.println("POSITION : " + voiture.getPosition());
+                System.out.println("CLASSE : " + voiture.getClass());
+                System.out.println("VITESSE : " + voiture.getVitesse());
+                System.out.println("POSITION : " + voiture.getPosition());
+                System.out.println("return Meta : " + voiture.getClass().getName());
+
+                break;
 
             case REFLEXION:
 
