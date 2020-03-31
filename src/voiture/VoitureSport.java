@@ -1,7 +1,7 @@
 package voiture;
 
 public class VoitureSport extends Voiture {
-    public VoitureSport(int vitesse){
-        super(vitesse);
+    public VoitureSport(){
+        super(100);
     }
 }

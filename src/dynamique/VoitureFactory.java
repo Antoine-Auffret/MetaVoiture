@@ -48,7 +48,13 @@ public class VoitureFactory {
         switch(modeConstruction)
         {
             case INSTANCIATION:
-                voiture = new Voiture(vitesse);
+                if(voitureSport){
+                    voiture = new VoitureSport();
+                }
+                else{
+                    voiture = new Voiture(vitesse);
+                }
+
                 break;
 
             case META:
@@ -105,7 +111,7 @@ public class VoitureFactory {
                 ByteArrayClasseLoader loader = new ByteArrayClasseLoader(classes);
                 try {
                     if (voitureSport == true) {
-                        voiture = (Voiture) (Class.forName("voiture.MetaVoitureSport", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{vitesse}));
+                        voiture = (Voiture) (Class.forName("voiture.MetaVoitureSport", true, loader).getDeclaredConstructor().newInstance());
                     }
                     else {
                         voiture = (Voiture) (Class.forName("voiture.MetaVoiture", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{vitesse}));
@@ -132,12 +138,13 @@ public class VoitureFactory {
                 Class<?> maClasse = null;
 
                 try {
+                    if(voitureSport){
+                        voiture = (Voiture)  Class.forName("voiture.VoitureSport").getDeclaredConstructor().newInstance();
+                    }
+                    else{
+                        voiture = (Voiture)  Class.forName("voiture.Voiture").getDeclaredConstructor(int.class).newInstance(vitesse);
+                    }
 
-                    maClasse = Class.forName("voiture.Voiture");
-
-                    Object o = maClasse.getDeclaredConstructor(int.class).newInstance(vitesse);
-
-                    voiture = Voiture.class.cast(o);
 
                 } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException
                 e) {
@@ -153,7 +160,7 @@ public class VoitureFactory {
     private static void genererConstructeurs(String nomClasse, boolean voitureSport, int vitesse, StringBuilder sb) {
 
         if (voitureSport == true) {
-            sb.append("public " + nomClasse + "(){ super(100); }\n");
+            sb.append("public " + nomClasse + "(){ super(); }\n");
         }
         else {
             sb.append("public " + nomClasse + "(int vitesse){ super(" + vitesse + "); }\n");

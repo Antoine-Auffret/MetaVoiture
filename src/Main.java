@@ -9,8 +9,8 @@ public class Main {
     public static void main(String[] args) {
 
         List<Voiture> mesVoitures = new ArrayList<Voiture>();
-        //ajoutVoituresInstanciation(mesVoitures);
-        //ajoutVoituresReflexion(mesVoitures);
+        ajoutVoituresInstanciation(mesVoitures);
+        ajoutVoituresReflexion(mesVoitures);
         ajoutVoituresMeta(mesVoitures);
 
         try {
