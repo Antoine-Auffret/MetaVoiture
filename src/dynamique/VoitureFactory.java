@@ -30,9 +30,7 @@ public class VoitureFactory {
         else {
             sb.append("public class " + nomClasse + " extends Voiture implements Surveillable {\n");
         }
-        //genererAttributs(sb);
         genererConstructeurs(nomClasse, voitureSport, vitesse, sb);
-        //genererMethodes(sb);
         sb.append("}");
 
         System.out.println("LA CLASSE");
@@ -114,7 +112,7 @@ public class VoitureFactory {
                         voiture = (Voiture) (Class.forName("voiture.MetaVoitureSport", true, loader).getDeclaredConstructor().newInstance());
                     }
                     else {
-                        voiture = (Voiture) (Class.forName("voiture.MetaVoiture", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{vitesse}));
+                        voiture = (Voiture) (Class.forName("voiture.MetaVoiture", true, loader).getDeclaredConstructor(int.class).newInstance(vitesse));
                     }
                 } catch (ClassNotFoundException | NoSuchMethodException e) {
                     e.printStackTrace();
@@ -134,8 +132,6 @@ public class VoitureFactory {
                 break;
 
             case REFLEXION:
-
-                Class<?> maClasse = null;
 
                 try {
                     if(voitureSport){
@@ -165,17 +161,5 @@ public class VoitureFactory {
         else {
             sb.append("public " + nomClasse + "(int vitesse){ super(" + vitesse + "); }\n");
         }
-    }
-
-    private static void genererMethodes(StringBuilder sb) {
-
-        sb.append("public int getPosition(){return position;}\n");
-        sb.append("public void deplacement(){position += vitesse;}\n");
-    }
-
-    private static void genererAttributs(StringBuilder sb) {
-
-        sb.append("private int position;\n");
-        sb.append("private int vitesse;\n");
     }
 }
