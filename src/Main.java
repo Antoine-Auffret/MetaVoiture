@@ -43,8 +43,8 @@ public class Main {
         mesVoitures.add(VoitureFactory.buildVoiture(VoitureFactory.ModeConstruction.REFLEXION,true, 0));
         mesVoitures.add(VoitureFactory.buildVoiture(VoitureFactory.ModeConstruction.REFLEXION, false, 50));
         mesVoitures.add(VoitureFactory.buildVoiture(VoitureFactory.ModeConstruction.REFLEXION, false, 10));
-
     }
+
     private static void surveillerVoiture(Voiture v) throws Exception {
         if (v.getPosition() > 1000){
             if (v.getClass().getName().contains("Meta")){

@@ -1,6 +1,6 @@
 package voiture;
 
-public class Voiture implements Surveillable {
+public class Voiture {
     private int vitesse = 10;
     private int position = 0;
     private int id;
