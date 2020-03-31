@@ -26,6 +26,22 @@ public class Voiture {
     }
     @Override
     public String toString(){
-        return "Voiture id : " + id + ", position : " + position + ", vitesse : " + vitesse;
+        String type = "";
+
+        if(id%3 ==0){type="sport";}
+
+        String method = "";
+
+        if(id<3){
+            method = "Instanciation";
+        }
+        else if(id<6){
+            method = "Reflexion";
+        }
+        else{
+            method = "Meta";
+        }
+
+        return "(" + method + ") Voiture " + type +" id : " + id + ", position : " + position + ", vitesse : " + vitesse;
     }
 }
