@@ -22,6 +22,6 @@ public class Voiture {
     }
     @Override
     public String toString(){
-        return "";
+        return "Voiture id : " + id + ", position : " + position + ", vitesse : " + vitesse;
     }
 }
