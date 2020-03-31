@@ -25,11 +25,11 @@ public class VoitureFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.append("package dynamique;\n");
-        sb.append("import voiture.VoitureSport;\n");
-        sb.append("public class " + nomClasse + " extends VoitureSport {\n");
-        genererAttributs(sb);
-        genererConstructeurs(nomClasse, 0, sb);
-        genererMethodes(sb);
+        sb.append("import voiture.Voiture;\n");
+        sb.append("public class " + nomClasse + " extends Voiture {\n");
+        //genererAttributs(sb);
+        genererConstructeurs(nomClasse, 100, sb);
+        //genererMethodes(sb);
         sb.append("}\n");
 
         System.out.println("LA CLASSE");
@@ -70,7 +70,7 @@ public class VoitureFactory {
                 };
 
                 // ******** ETAPE #2 : Génération du code source
-                List<JavaFileObject> source = List.of(buildSource("MetaVoitureSport"));
+                List<JavaFileObject> source = List.of(buildSource("MetaVoiture"));
 
                 // ******** ETAPE #3 : Compilation
                 JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, collector, null,
@@ -94,7 +94,7 @@ public class VoitureFactory {
                 // ******** ETAPE #4 : Instanciation
                 ByteArrayClasseLoader loader = new ByteArrayClasseLoader(classes);
                 try {
-                    voiture = (Voiture) (Class.forName("dynamique.MetaVoitureSport", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{10}));
+                    voiture = (Voiture) (Class.forName("dynamique.MetaVoiture", true, loader).getDeclaredConstructor(new Class[] {int.class}).newInstance(new Object[]{10}));
                 } catch (ClassNotFoundException | NoSuchMethodException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -144,11 +144,12 @@ public class VoitureFactory {
     private static void genererMethodes(StringBuilder sb) {
 
         sb.append("public int getPosition(){return position;}\n");
-
+        sb.append("public void deplacement(){position += vitesse;}\n");
     }
 
     private static void genererAttributs(StringBuilder sb) {
 
         sb.append("private int position;\n");
+        sb.append("private int vitesse;\n");
     }
 }

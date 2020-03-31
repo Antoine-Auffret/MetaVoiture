@@ -46,10 +46,7 @@ public class Main {
 
     }
     private static void surveillerVoiture(Voiture v) throws Exception {
-        System.out.println(v.getPosition());
-        if (v.getPosition() > 500){
-            System.out.println("depassement");
-            System.out.println(v.getClass().getName());
+        if (v.getPosition() > 1000){
             if (v.getClass().getName().contains("Meta")){
                 int depassement = ((Surveillable)v).surveiller(60);
                 if (depassement > 10) {

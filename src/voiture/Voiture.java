@@ -1,6 +1,6 @@
 package voiture;
 
-public class Voiture {
+public class Voiture implements Surveillable {
     private int vitesse = 10;
     private int position = 0;
     private int id;
@@ -18,8 +18,11 @@ public class Voiture {
         this.position = position;
     }
     public int getVitesse(){ return vitesse; }
-    public int getId(){
+    public int getId() {
         return id;
+    }
+    public int surveiller(int limite) {
+        return vitesse-limite;
     }
     @Override
     public String toString(){
